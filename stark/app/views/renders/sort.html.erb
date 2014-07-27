@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+      <div>
+          <%=button_to "Hot", renders_sort_path(:sort => "hot"),  :remote=>true, :method=>'get', :class =>"btn btn-danger" %>
+        </div>
+        <div>
+          <%=button_to "Last", renders_sort_path(:sort => "last"),  :remote=>true, :method=>'get', :class =>"btn btn-danger" %>
+        </div>
+      <div class="col-md-12" style="width:80%">
+          <%=render :partial=>"shared/feed_item", :collection=>@feed_items, :as=>:feed_item %>
+      </div>
+
+      <div>
+          <%= will_paginate @episode_feed_items, renderer: BootstrapPagination::Rails%>
+      </div>
+  </div>
+</div>
+<%=javascript_include_tag 'image_resize' %>
