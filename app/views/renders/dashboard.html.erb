@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="row" id="episode-field">
+      <%= render :partial=>'shared/comment_object', :locals=>{:feed_item=>@feed_item} %>
+    </div>
+    <div class="row spacing-between-episode-comment" id="comment-field">
+      <div class="col-md-10 col-md-offset-1 episode-block">
+        <%= render :partial=> 'shared/all_comment', :collection=> @all_comments, :as=>:all_comment %>
+      </div>
+    </div>
+
+    <div class="row spacing-between-episode-comment" id="make-comment-field">
+       <div class="col-md-10 col-md-offset-1">
+       <%= form_for :comment, :remote => true, :url => url_for(:controller=>'renders', :action=>'produce', :episode_id=>@episode_id) do |f| %>
+         <div class="row">
+            <%= f.label :content, "Comment", :class=>"comment-label-size"%>
+         </div>
+
+         <div class="row">
+            <div class="col-md-8 comment-box-left-spacing">
+            <%= f.text_area :content, class: "comment-upload-box", placeholder: "Please edit your comment...", maxlength: "140", id: "word-controlled-area"%>
+            </div>
+            <div class="col-md-2 widget-top-spacing">
+              <input type="value" id="word-num-calc" class="pull-right word-num-control-box">
+              </input>
+            </div>
+            <div class="col-md-2 widget-top-spacing">
+              <div class="pull-right">
+              <%= f.submit "Submit", class: "btn btn-large btn-primary"%>
+              </div>
+            </div>
+         </div>
+
+      <% end %>
+      </div>
+    </div>
+
+</div>
+<%= javascript_include_tag 'count_dash' %>
+<%= javascript_include_tag 'image_resize' %>
